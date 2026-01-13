@@ -17,6 +17,9 @@ pnpm-debug.log*
 .env
 .env.*.local
 
+# deploy artifacts
+deploy.zip
+
 # IDE
 .vscode/
 .idea/

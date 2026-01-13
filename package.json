@@ -6,25 +6,29 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "node scripts/deploy.js",
+    "deploy": "node scripts/deploy.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "react-scripts start",
     "lint": "eslint src --ext .ts,.tsx"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
+    "archiver": "^7.0.1",
     "i18next": "^22.4.10",
-    "react-i18next": "^12.1.4"
+    "node-ssh": "^13.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^12.1.4",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.5"
   },
   "devDependencies": {
-    "eslint": "^8.45.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0"
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint": "^8.45.0"
   },
   "browserslist": {
     "production": [

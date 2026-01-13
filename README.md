@@ -35,6 +35,11 @@ npm run dev
 npx tsc -b && npm run lint
 ```
 
+### Deploy (SSH, после build)
+- Скрипт: [`scripts/deploy.js`](scripts/deploy.js:1)
+- Настройка: скопируй [`.env.example`](.env.example:1) → `.env`, выставь `DEPLOY_ENABLED=1` и параметры SSH
+- Триггер: `npm run build` → автоматически выполнит `postbuild` (deploy)
+
 ---
 
 ## RU — Как устроен контент (истории/сцены/зоны)
@@ -96,6 +101,11 @@ Open: `http://localhost:3000`
 ```bash
 npx tsc -b && npm run lint
 ```
+
+### Deploy (SSH, after build)
+- Script: [`scripts/deploy.js`](scripts/deploy.js:1)
+- Setup: copy [`.env.example`](.env.example:1) → `.env`, set `DEPLOY_ENABLED=1` and SSH params
+- Trigger: `npm run build` will run `postbuild` (deploy)
 
 ---
 
