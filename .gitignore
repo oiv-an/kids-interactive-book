@@ -1,0 +1,31 @@
+# dependencies
+node_modules/
+
+# production
+build/
+
+# misc
+.DS_Store
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# env files
+.env
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+
+# OS / temp
+Thumbs.db
+
+# CRA / cache
+.eslintcache
+
+# optional: keep huge raw assets out if needed
+# public/assets/raw/

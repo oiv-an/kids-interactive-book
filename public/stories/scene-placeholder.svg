@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF8F0"/>
+      <stop offset="100%" stop-color="#FDE7D6"/>
+    </linearGradient>
+
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE9D6"/>
+      <stop offset="100%" stop-color="#F9D8C0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="1200" height="800" fill="url(#sky)"/>
+  <rect x="0" y="520" width="1200" height="280" fill="url(#ground)"/>
+
+  <!-- gentle decorative blobs -->
+  <g opacity="0.12" fill="#FF6B6B">
+    <circle cx="170" cy="170" r="110"/>
+    <circle cx="980" cy="220" r="140"/>
+    <circle cx="620" cy="140" r="90"/>
+  </g>
+
+  <!-- zone hints (visual only in placeholder) -->
+  <g opacity="0.14" fill="#000">
+    <rect x="160" y="300" width="260" height="220" rx="90"/>
+    <rect x="720" y="280" width="320" height="250" rx="120"/>
+  </g>
+
+  <!-- subtle frame -->
+  <rect x="24" y="24" width="1152" height="752" rx="32" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="3"/>
+</svg>

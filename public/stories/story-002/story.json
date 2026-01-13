@@ -1,0 +1,34 @@
+{
+  "id": "story-002",
+  "scenes": [
+    {
+      "id": "scene-001",
+      "imageUrl": "/stories/scene-placeholder.svg",
+      "zones": [
+        {
+          "id": "zone-001",
+          "x": 20,
+          "y": 40,
+          "width": 60,
+          "height": 30,
+          "radius": 18,
+          "audioCueId": "cue_placeholder",
+          "tts": {
+            "ru": "Скоро будет новая история.",
+            "en": "A new story is coming soon."
+          }
+        }
+      ]
+    }
+  ],
+  "audioSprite": {
+    "ru": {
+      "url": null,
+      "cues": [{ "id": "cue_placeholder", "startMs": 0 }]
+    },
+    "en": {
+      "url": null,
+      "cues": [{ "id": "cue_placeholder", "startMs": 0 }]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "stories": [
+    {
+      "id": "story-001",
+      "titleKey": "kids.stories.story001.title",
+      "coverImageUrl": "/stories/placeholder.svg",
+      "storyUrl": "/stories/story-001/story.json"
+    },
+    {
+      "id": "story-002",
+      "titleKey": "kids.stories.story002.title",
+      "coverImageUrl": "/stories/placeholder.svg",
+      "storyUrl": "/stories/story-002/story.json",
+      "isPlaceholder": true
+    }
+  ]
+}
