@@ -4,6 +4,14 @@
 Платформы: iOS Safari, Android Chrome, Desktop.
 
 ---
+## RU — Документация (Build in Public)
+
+Папка для публичного процесса (промпты, решения, заметки): [`docs/README.md`](docs/README.md:1)
+
+**Как развивается проект (devlog / “ритм разработки”)** — читать здесь: [`docs/steps/01-step-01.md`](docs/steps/01-step-01.md:1)
+Важно: этот файл ведёт **только Иван** (я его не редактирую).
+
+---
 
 ## RU — Быстрый старт
 
@@ -65,11 +73,7 @@ npx tsc -b && npm run lint
 
 ---
 
-## RU — Документация (Build in Public)
 
-Папка для публичного процесса (промпты, решения, заметки): [`docs/README.md`](docs/README.md:1)
-
----
 
 ## EN — Quick start
 
@@ -96,8 +100,14 @@ npx tsc -b && npm run lint
 ---
 
 ## Contributing
-Пока без бюрократии: PR/Issue приветствуются.  
+Пока без бюрократии: PR/Issue приветствуются.
 Не добавляйте секреты/ключи/PII (детские проекты).
+
+---
+
+## Project devlog
+If you want to see how the project evolves, read: [`docs/steps/01-step-01.md`](docs/steps/01-step-01.md:1)
+Note: this file is maintained by **Ivan only** (I do not edit it).
 
 ---
 
