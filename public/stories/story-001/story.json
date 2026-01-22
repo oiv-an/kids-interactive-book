@@ -2,134 +2,604 @@
   "id": "story-001",
   "scenes": [
     {
-      "id": "scene-001",
-      "imageUrl": "/assets/images/story-001/scene-001.png",
+      "id": "scene-009",
+      "imageUrl": "/assets/images/story-001/scene-002.webp",
       "zones": [
         {
-          "id": "sun",
-          "x": 14,
-          "y": 12,
-          "width": 10,
-          "height": 16,
-          "radius": 40,
-          "audioCueId": "cue_sun",
-          "ttsKey": "kids.elements.sun"
-        },
-        {
-          "id": "house",
-          "x": 42,
-          "y": 42,
-          "width": 40,
-          "height": 60,
-          "radius": 12,
-          "audioCueId": "cue_house",
-          "ttsKey": "kids.elements.house"
-        },
-        {
-          "id": "tree",
-          "x": 66,
-          "y": 25,
-          "width": 10,
-          "height": 34,
-          "radius": 40,
-          "audioCueId": "cue_tree",
-          "ttsKey": "kids.elements.tree"
-        },
-        {
-          "id": "fence",
-          "x": 90,
-          "y": 63,
-          "width": 20,
-          "height": 34,
+          "id": "fire_truck",
+          "x": 0.113,
+          "y": 0.2625,
+          "width": 0.7581,
+          "height": 0.4646,
           "radius": 10,
-          "audioCueId": "cue_fence",
-          "ttsKey": "kids.elements.fence"
+          "audioCueId": "cue_scene009_fire_truck",
+          "ttsKey": "kids.stories.story001.scene009.fire_truck"
         },
         {
-          "id": "chicken",
-          "x": 72,
-          "y": 72,
-          "width": 20,
-          "height": 44,
-          "radius": 35,
-          "audioCueId": "cue_chicken",
-          "ttsKey": "kids.elements.chicken"
+          "id": "ladder",
+          "x": 0.1607,
+          "y": 0.0496,
+          "width": 0.5849,
+          "height": 0.1383,
+          "radius": 10,
+          "audioCueId": "cue_scene009_ladder",
+          "ttsKey": "kids.stories.story001.scene009.ladder"
+        },
+        {
+          "id": "firefighter",
+          "x": 0.4416,
+          "y": 0.4232,
+          "width": 0.1413,
+          "height": 0.3519,
+          "radius": 18,
+          "audioCueId": "cue_scene009_firefighter",
+          "ttsKey": "kids.stories.story001.scene009.firefighter"
+        },
+        {
+          "id": "hose",
+          "x": 0.0465,
+          "y": 0.8153,
+          "width": 0.5901,
+          "height": 0.1431,
+          "radius": 18,
+          "audioCueId": "cue_scene009_hose",
+          "ttsKey": "kids.stories.story001.scene009.hose"
+        },
+        {
+          "id": "fire",
+          "x": 0.8185,
+          "y": 0.7256,
+          "width": 0.18,
+          "height": 0.2,
+          "radius": 22,
+          "audioCueId": "cue_scene009_fire",
+          "ttsKey": "kids.stories.story001.scene009.fire"
         }
       ]
     },
     {
-      "id": "scene-002",
-      "imageUrl": "/stories/scene-placeholder.svg",
+      "id": "scene-008",
+      "imageUrl": "/assets/images/story-001/scene-001.webp",
       "zones": [
         {
-          "id": "zone-002",
-          "x": 55,
-          "y": 38,
-          "width": 24,
-          "height": 30,
-          "radius": 50,
-          "audioCueId": "cue_object",
-          "tts": {
-            "ru": "Нажми на предмет.",
-            "en": "Tap the object."
-          }
+          "id": "ambulance",
+          "x": 0.1515,
+          "y": 0.22,
+          "width": 0.5016,
+          "height": 0.5038,
+          "radius": 10,
+          "audioCueId": "cue_scene008_ambulance",
+          "ttsKey": "kids.stories.story001.scene008.ambulance"
+        },
+        {
+          "id": "paramedic",
+          "x": 0.2781,
+          "y": 0.424,
+          "width": 0.1084,
+          "height": 0.4296,
+          "radius": 18,
+          "audioCueId": "cue_scene008_paramedic",
+          "ttsKey": "kids.stories.story001.scene008.paramedic"
+        },
+        {
+          "id": "driver",
+          "x": 0.6655,
+          "y": 0.276,
+          "width": 0.106,
+          "height": 0.2248,
+          "radius": 22,
+          "audioCueId": "cue_scene008_driver",
+          "ttsKey": "kids.stories.story001.scene008.driver"
+        },
+        {
+          "id": "stretcher",
+          "x": 0.3877,
+          "y": 0.5255,
+          "width": 0.0939,
+          "height": 0.168,
+          "radius": 12,
+          "audioCueId": "cue_scene008_stretcher",
+          "ttsKey": "kids.stories.story001.scene008.stretcher"
+        },
+        {
+          "id": "lightbar",
+          "x": 0.52,
+          "y": 0.1,
+          "width": 0.2105,
+          "height": 0.1128,
+          "radius": 40,
+          "audioCueId": "cue_scene008_lightbar",
+          "ttsKey": "kids.stories.story001.scene008.lightbar"
         }
       ]
     },
     {
-      "id": "scene-003",
-      "imageUrl": "/stories/scene-placeholder.svg",
+      "id": "scene-007",
+      "imageUrl": "/assets/images/story-001/scene-007.webp",
       "zones": [
         {
-          "id": "zone-003",
-          "x": 35,
-          "y": 55,
-          "width": 26,
-          "height": 26,
-          "radius": 30,
-          "audioCueId": "cue_sound",
-          "tts": {
-            "ru": "Слушай звук!",
-            "en": "Listen to the sound!"
-          }
+          "id": "police_van",
+          "x": 0.1551,
+          "y": 0.2273,
+          "width": 0.4924,
+          "height": 0.4974,
+          "radius": 10,
+          "audioCueId": "cue_scene007_police_van",
+          "ttsKey": "kids.stories.story001.scene007.police_van"
+        },
+        {
+          "id": "officer",
+          "x": 0.28,
+          "y": 0.52,
+          "width": 0.0844,
+          "height": 0.3784,
+          "radius": 18,
+          "audioCueId": "cue_scene007_officer",
+          "ttsKey": "kids.stories.story001.scene007.officer"
+        },
+        {
+          "id": "driver",
+          "x": 0.6539,
+          "y": 0.2592,
+          "width": 0.1389,
+          "height": 0.2608,
+          "radius": 22,
+          "audioCueId": "cue_scene007_driver",
+          "ttsKey": "kids.stories.story001.scene007.driver"
+        },
+        {
+          "id": "lightbar",
+          "x": 0.5387,
+          "y": 0.1176,
+          "width": 0.1911,
+          "height": 0.092,
+          "radius": 40,
+          "audioCueId": "cue_scene007_lightbar",
+          "ttsKey": "kids.stories.story001.scene007.lightbar"
+        },
+        {
+          "id": "equipment",
+          "x": 0.37,
+          "y": 0.24,
+          "width": 0.1139,
+          "height": 0.5016,
+          "radius": 8,
+          "audioCueId": "cue_scene007_equipment",
+          "ttsKey": "kids.stories.story001.scene007.equipment"
+        }
+      ]
+    },
+    {
+      "id": "scene-010",
+      "imageUrl": "/assets/images/story-001/scene-006.webp",
+      "zones": [
+        {
+          "id": "garbage_truck",
+          "x": 0.4527,
+          "y": 0.3722,
+          "width": 0.3037,
+          "height": 0.3621,
+          "radius": 10,
+          "audioCueId": "cue_scene010_garbage_truck",
+          "ttsKey": "kids.stories.story001.scene010.garbage_truck"
         }
       ]
     },
     {
       "id": "scene-004",
-      "imageUrl": "/stories/scene-placeholder.svg",
+      "imageUrl": "/assets/images/story-001/scene-005.webp",
       "zones": [
         {
-          "id": "zone-004",
-          "x": 12,
-          "y": 20,
-          "width": 28,
-          "height": 24,
-          "radius": 15,
-          "audioCueId": "cue_repeat",
-          "tts": {
-            "ru": "Долго нажми, чтобы повторить.",
-            "en": "Press and hold to repeat."
-          }
+          "id": "dump_truck",
+          "x": 0.3059,
+          "y": 0.5057,
+          "width": 0.4425,
+          "height": 0.2878,
+          "radius": 10,
+          "audioCueId": "cue_scene004_dump_truck",
+          "ttsKey": "kids.stories.story001.scene004.dump_truck"
+        },
+        {
+          "id": "dump_bed",
+          "x": 0.5421,
+          "y": 0.3353,
+          "width": 0.2914,
+          "height": 0.231,
+          "radius": 10,
+          "audioCueId": "cue_scene004_dump_bed",
+          "ttsKey": "kids.stories.story001.scene004.dump_bed"
+        },
+        {
+          "id": "crane",
+          "x": 0.6225,
+          "y": 0.0156,
+          "width": 0.3439,
+          "height": 0.1794,
+          "radius": 8,
+          "audioCueId": "cue_scene004_crane",
+          "ttsKey": "kids.stories.story001.scene004.crane"
+        },
+        {
+          "id": "wheelbarrow",
+          "x": 0.0812,
+          "y": 0.8625,
+          "width": 0.1894,
+          "height": 0.1279,
+          "radius": 18,
+          "audioCueId": "cue_scene004_wheelbarrow",
+          "ttsKey": "kids.stories.story001.scene004.wheelbarrow"
+        },
+        {
+          "id": "worker",
+          "x": 0.8621,
+          "y": 0.5856,
+          "width": 0.0958,
+          "height": 0.3232,
+          "radius": 18,
+          "audioCueId": "cue_scene004_worker",
+          "ttsKey": "kids.stories.story001.scene004.worker"
         }
       ]
     },
     {
       "id": "scene-005",
-      "imageUrl": "/stories/scene-placeholder.svg",
+      "imageUrl": "/assets/images/story-001/scene-009.webp",
       "zones": [
         {
-          "id": "zone-005",
+          "id": "bulldozer",
+          "x": 0.488,
+          "y": 0.2776,
+          "width": 0.3167,
+          "height": 0.3766,
+          "radius": 10,
+          "audioCueId": "cue_scene005_bulldozer",
+          "ttsKey": "kids.stories.story001.scene005.bulldozer"
+        },
+        {
+          "id": "bulldozer_blade",
+          "x": 0.2397,
+          "y": 0.6641,
+          "width": 0.2217,
+          "height": 0.1991,
+          "radius": 10,
+          "audioCueId": "cue_scene005_bulldozer_blade",
+          "ttsKey": "kids.stories.story001.scene005.bulldozer_blade"
+        },
+        {
+          "id": "tracks",
+          "x": 0.5162,
+          "y": 0.6632,
+          "width": 0.3304,
+          "height": 0.1856,
+          "radius": 12,
+          "audioCueId": "cue_scene005_tracks",
+          "ttsKey": "kids.stories.story001.scene005.tracks"
+        },
+        {
+          "id": "lighthouse",
+          "x": 0.3243,
+          "y": 0.2536,
+          "width": 0.0507,
+          "height": 0.1624,
+          "radius": 20,
+          "audioCueId": "cue_scene005_lighthouse",
+          "ttsKey": "kids.stories.story001.scene005.lighthouse"
+        },
+        {
+          "id": "ship",
+          "x": 0,
+          "y": 0.4207,
+          "width": 0.127,
+          "height": 0.1744,
+          "radius": 10,
+          "audioCueId": "cue_scene005_ship",
+          "ttsKey": "kids.stories.story001.scene005.ship"
+        }
+      ]
+    },
+    {
+      "id": "scene-006",
+      "imageUrl": "/assets/images/story-001/scene-004.webp",
+      "zones": [
+        {
+          "id": "excavator_crane",
+          "x": 0.4362,
+          "y": 0.2288,
+          "width": 0.3896,
+          "height": 0.4399,
+          "radius": 10,
+          "audioCueId": "cue_scene006_excavator_crane",
+          "ttsKey": "kids.stories.story001.scene006.excavator_crane"
+        },
+        {
+          "id": "hook",
+          "x": 0.1627,
+          "y": 0.2705,
+          "width": 0.0998,
+          "height": 0.1351,
+          "radius": 50,
+          "audioCueId": "cue_scene006_hook",
+          "ttsKey": "kids.stories.story001.scene006.hook"
+        },
+        {
+          "id": "bricks",
+          "x": 0.1177,
+          "y": 0.4902,
+          "width": 0.1942,
+          "height": 0.1656,
+          "radius": 8,
+          "audioCueId": "cue_scene006_bricks",
+          "ttsKey": "kids.stories.story001.scene006.bricks"
+        },
+        {
+          "id": "lighthouse",
+          "x": 0.32,
+          "y": 0.26,
+          "width": 0.0527,
+          "height": 0.1447,
+          "radius": 20,
+          "audioCueId": "cue_scene006_lighthouse",
+          "ttsKey": "kids.stories.story001.scene006.lighthouse"
+        },
+        {
+          "id": "ship",
+          "x": 0,
+          "y": 0.44,
+          "width": 0.1172,
+          "height": 0.1504,
+          "radius": 10,
+          "audioCueId": "cue_scene006_ship",
+          "ttsKey": "kids.stories.story001.scene006.ship"
+        }
+      ]
+    },
+    {
+      "id": "scene-003",
+      "imageUrl": "/assets/images/story-001/scene-003.webp",
+      "zones": [
+        {
+          "id": "tanker_truck",
+          "x": 0.1243,
+          "y": 0.3457,
+          "width": 0.36,
+          "height": 0.3271,
+          "radius": 8,
+          "audioCueId": "cue_scene003_tanker_truck",
+          "ttsKey": "kids.stories.story001.scene003.tanker_truck"
+        },
+        {
+          "id": "fuel_pumps",
+          "x": 0.534,
+          "y": 0.36,
+          "width": 0.1767,
+          "height": 0.2327,
+          "radius": 10,
+          "audioCueId": "cue_scene003_fuel_pumps",
+          "ttsKey": "kids.stories.story001.scene003.fuel_pumps"
+        },
+        {
+          "id": "station_canopy",
+          "x": 0.1794,
+          "y": 0.1473,
+          "width": 0.6394,
+          "height": 0.1791,
+          "radius": 6,
+          "audioCueId": "cue_scene003_station_canopy",
+          "ttsKey": "kids.stories.story001.scene003.station_canopy"
+        },
+        {
+          "id": "underground_tank",
+          "x": 0.1235,
+          "y": 0.786,
+          "width": 0.408,
+          "height": 0.1335,
+          "radius": 18,
+          "audioCueId": "cue_scene003_underground_tank",
+          "ttsKey": "kids.stories.story001.scene003.underground_tank"
+        },
+        {
+          "id": "pickup_truck",
+          "x": 0.7474,
+          "y": 0.6432,
+          "width": 0.1776,
+          "height": 0.1975,
+          "radius": 12,
+          "audioCueId": "cue_scene003_pickup_truck",
+          "ttsKey": "kids.stories.story001.scene003.pickup_truck"
+        }
+      ]
+    },
+    {
+      "id": "scene-002",
+      "imageUrl": "/assets/images/story-001/scene-008.webp",
+      "zones": [
+        {
+          "id": "cement_truck",
+          "x": 10,
+          "y": 30,
+          "width": 58,
+          "height": 42,
+          "radius": 10,
+          "audioCueId": "cue_scene002_cement_truck",
+          "ttsKey": "kids.stories.story001.scene002.cement_truck"
+        },
+        {
+          "id": "chute",
+          "x": 58,
+          "y": 42,
+          "width": 24,
+          "height": 28,
+          "radius": 18,
+          "audioCueId": "cue_scene002_chute",
+          "ttsKey": "kids.stories.story001.scene002.chute"
+        },
+        {
+          "id": "concrete",
+          "x": 66,
+          "y": 70,
+          "width": 20,
+          "height": 14,
+          "radius": 14,
+          "audioCueId": "cue_scene002_concrete",
+          "ttsKey": "kids.stories.story001.scene002.concrete"
+        },
+        {
+          "id": "cement_bags",
+          "x": 25,
+          "y": 76,
+          "width": 22,
+          "height": 16,
+          "radius": 10,
+          "audioCueId": "cue_scene002_cement_bags",
+          "ttsKey": "kids.stories.story001.scene002.cement_bags"
+        },
+        {
+          "id": "bricks",
+          "x": 7,
+          "y": 72,
+          "width": 18,
+          "height": 18,
+          "radius": 8,
+          "audioCueId": "cue_scene002_bricks",
+          "ttsKey": "kids.stories.story001.scene002.bricks"
+        }
+      ]
+    },
+    {
+      "id": "scene-011",
+      "imageUrl": "/assets/images/story-001/scene-011.webp",
+      "zones": [
+        {
+          "id": "excavator",
+          "x": 0.0858,
+          "y": 0.4555,
+          "width": 0.3772,
+          "height": 0.3117,
+          "radius": 10,
+          "audioCueId": "cue_scene011_excavator",
+          "ttsKey": "kids.stories.story001.scene011.excavator"
+        },
+        {
+          "id": "excavator_bucket",
+          "x": 0.4737,
+          "y": 0.6737,
+          "width": 0.1533,
+          "height": 0.1599,
+          "radius": 8,
+          "audioCueId": "cue_scene011_excavator_bucket",
+          "ttsKey": "kids.stories.story001.scene011.excavator_bucket"
+        },
+        {
+          "id": "operator",
+          "x": 0.3565,
+          "y": 0.4473,
+          "width": 0.0913,
+          "height": 0.1583,
+          "radius": 20,
+          "audioCueId": "cue_scene011_operator",
+          "ttsKey": "kids.stories.story001.scene011.operator"
+        },
+        {
+          "id": "construction_tower_crane",
+          "x": 0.1333,
+          "y": 0.0472,
+          "width": 0.3181,
+          "height": 0.1699,
+          "radius": 6,
+          "audioCueId": "cue_scene011_construction_tower_crane",
+          "ttsKey": "kids.stories.story001.scene011.construction_tower_crane"
+        }
+      ]
+    },
+    {
+      "id": "scene-012",
+      "imageUrl": "/assets/images/story-001/scene-012.webp",
+      "zones": [
+        {
+          "id": "wheel_loader",
+          "x": 15,
+          "y": 15,
+          "width": 75,
+          "height": 75,
+          "radius": 10,
+          "audioCueId": "cue_scene012_wheel_loader",
+          "ttsKey": "kids.stories.story001.scene012.wheel_loader"
+        },
+        {
+          "id": "loader_bucket",
+          "x": 20,
+          "y": 25,
+          "width": 40,
+          "height": 30,
+          "radius": 8,
+          "audioCueId": "cue_scene012_loader_bucket",
+          "ttsKey": "kids.stories.story001.scene012.loader_bucket"
+        },
+        {
+          "id": "loader_operator",
+          "x": 32,
+          "y": 32,
+          "width": 14,
+          "height": 20,
+          "radius": 18,
+          "audioCueId": "cue_scene012_loader_operator",
+          "ttsKey": "kids.stories.story001.scene012.loader_operator"
+        },
+        {
+          "id": "soil_pile",
           "x": 60,
-          "y": 62,
+          "y": 60,
           "width": 30,
-          "height": 24,
-          "radius": 15,
-          "audioCueId": "cue_done",
-          "tts": {
-            "ru": "Молодец! Это пятая сцена.",
-            "en": "Great job! This is the fifth scene."
-          }
+          "height": 25,
+          "radius": 12,
+          "audioCueId": "cue_scene012_soil_pile",
+          "ttsKey": "kids.stories.story001.scene012.soil_pile"
+        }
+      ]
+    },
+    {
+      "id": "scene-013",
+      "imageUrl": "/assets/images/story-001/scene-013.webp",
+      "zones": [
+        {
+          "id": "tractor",
+          "x": 0.1459,
+          "y": 0.188,
+          "width": 0.4754,
+          "height": 0.6468,
+          "radius": 10,
+          "audioCueId": "cue_scene013_tractor",
+          "ttsKey": "kids.stories.story001.scene013.tractor"
+        },
+        {
+          "id": "tractor_loader",
+          "x": 0.6384,
+          "y": 0.5778,
+          "width": 0.2811,
+          "height": 0.252,
+          "radius": 8,
+          "audioCueId": "cue_scene013_tractor_loader",
+          "ttsKey": "kids.stories.story001.scene013.tractor_loader"
+        },
+        {
+          "id": "tractor_operator",
+          "x": 0.2628,
+          "y": 0.2715,
+          "width": 0.12,
+          "height": 0.18,
+          "radius": 16,
+          "audioCueId": "cue_scene013_tractor_operator",
+          "ttsKey": "kids.stories.story001.scene013.tractor_operator"
+        },
+        {
+          "id": "hay",
+          "x": 0.7167,
+          "y": 0.6284,
+          "width": 0.1431,
+          "height": 0.1608,
+          "radius": 10,
+          "audioCueId": "cue_scene013_hay",
+          "ttsKey": "kids.stories.story001.scene013.hay"
         }
       ]
     }
@@ -137,33 +607,11 @@
   "audioSprite": {
     "ru": {
       "url": null,
-      "cues": [
-        { "id": "cue_sun", "startMs": 0 },
-        { "id": "cue_house", "startMs": 5000 },
-        { "id": "cue_tree", "startMs": 10000 },
-        { "id": "cue_fence", "startMs": 15000 },
-        { "id": "cue_chicken", "startMs": 20000 },
-
-        { "id": "cue_object", "startMs": 25000 },
-        { "id": "cue_sound", "startMs": 30000 },
-        { "id": "cue_repeat", "startMs": 35000 },
-        { "id": "cue_done", "startMs": 40000 }
-      ]
+      "cues": []
     },
     "en": {
       "url": null,
-      "cues": [
-        { "id": "cue_sun", "startMs": 0 },
-        { "id": "cue_house", "startMs": 5000 },
-        { "id": "cue_tree", "startMs": 10000 },
-        { "id": "cue_fence", "startMs": 15000 },
-        { "id": "cue_chicken", "startMs": 20000 },
-
-        { "id": "cue_object", "startMs": 25000 },
-        { "id": "cue_sound", "startMs": 30000 },
-        { "id": "cue_repeat", "startMs": 35000 },
-        { "id": "cue_done", "startMs": 40000 }
-      ]
+      "cues": []
     }
   }
 }

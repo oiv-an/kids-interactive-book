@@ -9,6 +9,8 @@ import SceneView from './components/SceneView';
 
 type LoadState = 'idle' | 'loading' | 'loaded' | 'error';
 
+const SWIPE_THRESHOLD = 50;
+
 function normalizeKidsLang(lng: string): KidsLang {
   return lng.startsWith('en') ? 'en' : 'ru';
 }
@@ -20,6 +22,10 @@ function App() {
   const [manifest, setManifest] = useState<KidsStoryManifest | null>(null);
 
   const [isPickerOpen, setIsPickerOpen] = useState<boolean>(false);
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+
+  const longPressTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const longPressDurationMs = 1500;
 
   const [activeStoryItem, setActiveStoryItem] = useState<KidsStoryManifestItem | null>(null);
   const [activeStoryState, setActiveStoryState] = useState<LoadState>('idle');
@@ -30,38 +36,6 @@ function App() {
   const kidsLang = useMemo(() => normalizeKidsLang(i18n.language), [i18n.language]);
 
   const hasUnlockedAudioRef = useRef<boolean>(false);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const run = async () => {
-      setManifestState('loading');
-      try {
-        const data = await loadKidsStoryManifest();
-        if (!isMounted) return;
-        setManifest(data);
-        setManifestState('loaded');
-
-        // Auto-open picker on first load for kid-friendly UX
-        setIsPickerOpen(true);
-      } catch {
-        if (!isMounted) return;
-        setManifestState('error');
-      }
-    };
-
-    run();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  const onAnyUserGestureCapture = useCallback(() => {
-    if (hasUnlockedAudioRef.current) return;
-    hasUnlockedAudioRef.current = true;
-    kidsAudioManager.unlockByUserGesture();
-  }, []);
 
   const selectStory = useCallback(async (storyItem: KidsStoryManifestItem) => {
     kidsAudioManager.stop('story_change');
@@ -80,6 +54,44 @@ function App() {
       setActiveStoryState('error');
     }
   }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const run = async () => {
+      setManifestState('loading');
+      try {
+        const data = await loadKidsStoryManifest();
+        if (!isMounted) return;
+        setManifest(data);
+        setManifestState('loaded');
+
+        // Always try to load the first story on refresh
+        if (data.stories && data.stories.length > 0) {
+          await selectStory(data.stories[0]);
+        } else {
+          setIsPickerOpen(true);
+        }
+      } catch (err) {
+        console.error('Failed to load manifest:', err);
+        if (!isMounted) return;
+        setManifestState('error');
+      }
+    };
+
+    run();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [selectStory]); // eslint-disable-line
+
+  const onAnyUserGestureCapture = useCallback(() => {
+    if (hasUnlockedAudioRef.current) return;
+    hasUnlockedAudioRef.current = true;
+    kidsAudioManager.unlockByUserGesture();
+  }, []);
+
 
   const setLanguage = useCallback(
     async (lang: KidsLang) => {
@@ -153,37 +165,126 @@ function App() {
 
   const stories = manifest?.stories ?? [];
 
+  const touchStartRef = useRef<number | null>(null);
+
+  const onTouchStartLocal = useCallback((e: React.TouchEvent) => {
+    touchStartRef.current = e.targetTouches[0].clientX;
+  }, []);
+
+  const onTouchEndLocal = useCallback(
+    (e: React.TouchEvent) => {
+      if (touchStartRef.current === null) return;
+      const touchEnd = e.changedTouches[0].clientX;
+      const diff = touchStartRef.current - touchEnd;
+
+      if (Math.abs(diff) > SWIPE_THRESHOLD) {
+        if (diff > 0) {
+          nextScene();
+        } else {
+          prevScene();
+        }
+      }
+      touchStartRef.current = null;
+    },
+    [nextScene, prevScene]
+  );
+
+  const toggleFullscreen = useCallback(() => {
+    if (!document.fullscreenElement) {
+      void document.documentElement.requestFullscreen().catch((err) => {
+        console.warn(`Error attempting to enable full-screen mode: ${err.message}`);
+      });
+      setIsFullscreen(true);
+    } else {
+      void document.exitFullscreen();
+      setIsFullscreen(false);
+    }
+  }, []);
+
+  const handleCloseFsMouseDown = useCallback(() => {
+    longPressTimeoutRef.current = setTimeout(() => {
+      if (document.fullscreenElement) {
+        void document.exitFullscreen();
+        setIsFullscreen(false);
+      }
+    }, longPressDurationMs);
+  }, []);
+
+  const handleCloseFsMouseUp = useCallback(() => {
+    if (longPressTimeoutRef.current) {
+      clearTimeout(longPressTimeoutRef.current);
+      longPressTimeoutRef.current = null;
+    }
+  }, []);
+
+  const handleCloseFsTouchStart = useCallback(() => {
+    longPressTimeoutRef.current = setTimeout(() => {
+      if (document.fullscreenElement) {
+        void document.exitFullscreen();
+        setIsFullscreen(false);
+      }
+    }, longPressDurationMs);
+  }, []);
+
+  const handleCloseFsTouchEnd = useCallback(() => {
+    if (longPressTimeoutRef.current) {
+      clearTimeout(longPressTimeoutRef.current);
+      longPressTimeoutRef.current = null;
+    }
+  }, []);
+
   return (
-    <div className="App" onPointerDownCapture={onAnyUserGestureCapture}>
-      <div className="KidsTopBar">
-        <button
-          className="KidsButton"
-          type="button"
-          onClick={() => setIsPickerOpen(true)}
-          disabled={manifestState !== 'loaded'}
-        >
-          {t('kids.ui.selectStory')}
-        </button>
-
-        <div className="KidsTopBarSpacer" />
-
-        <div className="KidsLangSwitch" role="group" aria-label="Language">
-          <button
-            className={`KidsLangButton ${kidsLang === 'ru' ? 'isActive' : ''}`}
-            type="button"
-            onClick={() => void setLanguage('ru')}
-          >
-            {t('kids.ui.languageRu')}
+    <div className={`App ${isFullscreen ? 'App--fullscreen' : ''}`} onPointerDownCapture={onAnyUserGestureCapture}>
+      {!isFullscreen && (
+        <div className="KidsTopBar">
+          <button className="KidsButton" type="button" onClick={toggleFullscreen}>
+            {t('kids.ui.fullscreen') || '⛶'}
           </button>
+
           <button
-            className={`KidsLangButton ${kidsLang === 'en' ? 'isActive' : ''}`}
+            className="KidsButton"
             type="button"
-            onClick={() => void setLanguage('en')}
+            onClick={() => setIsPickerOpen(true)}
+            disabled={manifestState !== 'loaded'}
           >
-            {t('kids.ui.languageEn')}
+            {t('kids.ui.selectStory')}
           </button>
+
+          <div className="KidsTopBarSpacer" />
+
+          <div className="KidsLangSwitch" role="group" aria-label="Language">
+            <button
+              className={`KidsLangButton ${kidsLang === 'ru' ? 'isActive' : ''}`}
+              type="button"
+              onClick={() => void setLanguage('ru')}
+            >
+              {t('kids.ui.languageRu')}
+            </button>
+            <button
+              className={`KidsLangButton ${kidsLang === 'en' ? 'isActive' : ''}`}
+              type="button"
+              onClick={() => void setLanguage('en')}
+            >
+              {t('kids.ui.languageEn')}
+            </button>
+          </div>
         </div>
-      </div>
+      )}
+
+      {isFullscreen && (
+        <button
+          className="KidsCloseFs"
+          type="button"
+          onMouseDown={handleCloseFsMouseDown}
+          onMouseUp={handleCloseFsMouseUp}
+          onMouseLeave={handleCloseFsMouseUp}
+          onTouchStart={handleCloseFsTouchStart}
+          onTouchEnd={handleCloseFsTouchEnd}
+          aria-label="Close fullscreen (long press)"
+        >
+          ✕
+        </button>
+      )}
 
       <div className="KidsMain">
         {manifestState === 'loading' ? <div className="KidsLoading">{t('kids.ui.loading')}</div> : null}
@@ -193,23 +294,38 @@ function App() {
         {activeStoryState === 'loading' ? <div className="KidsLoading">{t('kids.ui.loading')}</div> : null}
         {activeStoryState === 'error' ? <div className="KidsLoading">Story error</div> : null}
 
-        {activeScene ? (
-          <div className="KidsStoryStage">
+        {activeScene && !isFullscreen ? (
+          <div
+            className="KidsStoryStage"
+            onTouchStart={onTouchStartLocal}
+            onTouchEnd={onTouchEndLocal}
+          >
             <SceneView scene={activeScene} onZoneInteract={onZoneInteract} />
 
-            <div className="KidsSceneNav">
-              <button className="KidsNavButton" type="button" onClick={prevScene} disabled={!canPrevScene}>
-                ‹
-              </button>
-              <div className="KidsSceneDots" aria-hidden="true">
-                {activeStory?.scenes.map((s, idx) => (
-                  <span key={s.id} className={`KidsDot ${idx === sceneIndex ? 'isActive' : ''}`} />
-                ))}
-              </div>
-              <button className="KidsNavButton" type="button" onClick={nextScene} disabled={!canNextScene}>
-                ›
-              </button>
-            </div>
+            <button
+              className="KidsNavSide KidsNavSide--prev"
+              type="button"
+              onClick={prevScene}
+              disabled={!canPrevScene}
+            >
+              ‹
+            </button>
+            <button
+              className="KidsNavSide KidsNavSide--next"
+              type="button"
+              onClick={nextScene}
+              disabled={!canNextScene}
+            >
+              ›
+            </button>
+          </div>
+        ) : activeScene && isFullscreen ? (
+          <div
+            className="KidsStoryStage"
+            onTouchStart={onTouchStartLocal}
+            onTouchEnd={onTouchEndLocal}
+          >
+            <SceneView scene={activeScene} onZoneInteract={onZoneInteract} />
           </div>
         ) : null}
       </div>

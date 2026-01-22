@@ -1,7 +1,9 @@
 # Game Voice (IVOL) — интерактивные истории с озвучкой для детей (Web)
 
-Открытый проект: интерактивные детские истории 1–3+ лет. Ребёнок нажимает на объекты на картинке — звучит озвучка (сейчас TTS, позже — mp3-sprite по таймкодам).  
+Открытый проект: интерактивные детские истории 1–3+ лет. Ребёнок нажимает на объекты на картинке — звучит озвучка (сейчас TTS, позже — mp3-sprite по таймкодам).
 Платформы: iOS Safari, Android Chrome, Desktop.
+
+Демо (production): https://kids.ivol.pro
 
 ---
 ## RU — Документация (Build in Public)
@@ -37,8 +39,9 @@ npx tsc -b && npm run lint
 
 ### Deploy (SSH, после build)
 - Скрипт: [`scripts/deploy.js`](scripts/deploy.js:1)
-- Настройка: скопируй [`.env.example`](.env.example:1) → `.env`, выставь `DEPLOY_ENABLED=1` и параметры SSH
+- Настройка: скопируй [`.env.example`](.env.example:1) → [`.env`](.env:1) и заполни **свои** параметры SSH (**.env не коммитится**)
 - Триггер: `npm run build` → автоматически выполнит `postbuild` (deploy)
+- Безопасность: если `DEPLOY_*` не настроены — деплой **пропускается** (build не падает)
 
 ---
 
@@ -104,8 +107,9 @@ npx tsc -b && npm run lint
 
 ### Deploy (SSH, after build)
 - Script: [`scripts/deploy.js`](scripts/deploy.js:1)
-- Setup: copy [`.env.example`](.env.example:1) → `.env`, set `DEPLOY_ENABLED=1` and SSH params
+- Setup: copy [`.env.example`](.env.example:1) → [`.env`](.env:1) and fill **your** SSH params (**.env is not committed**)
 - Trigger: `npm run build` will run `postbuild` (deploy)
+- Safety: if `DEPLOY_*` vars are missing — deploy is skipped (build won’t fail)
 
 ---
 

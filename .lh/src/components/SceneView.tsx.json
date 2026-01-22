@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/SceneView.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1769053651239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1769054059229,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -131,5 +131,5 @@\n         />\r\n       </div>\r\n     </div>\r\n   );\r\n-}\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1769054235592,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -125,8 +125,10 @@\n         ))}\r\n \r\n         <ZoneEditorOverlay\r\n           isEnabled={isEditMode}\r\n+          sceneId={scene.id}\r\n+          imageUrl={scene.imageUrl}\r\n           zones={zonesForRender}\r\n           onChangeZones={(next) => setDraftZones(next)}\r\n         />\r\n       </div>\r\n"
+                }
+            ],
+            "date": 1769053651239,
+            "name": "Commit-0",
+            "content": "/* eslint-disable no-unused-vars */\r\nimport React, { useEffect, useMemo, useRef, useState } from 'react';\r\nimport type { KidsScene, KidsZone } from '../types/kidsStory';\r\nimport InteractiveZone from './InteractiveZone';\r\n\r\ntype InteractionType = 'tap' | 'longpress' | 'doubletap';\r\n\r\ntype Props = {\r\n  scene: KidsScene;\r\n  onZoneInteract: (type: InteractionType, zone: KidsZone) => void;\r\n};\r\n\r\nfunction getMinZonePx(containerWidth: number): number {\r\n  // MVP1: keep it simple and kid-friendly\r\n  // - recommended: 60px\r\n  // - but on very small screens allow a bit smaller (still close to iOS 44)\r\n  if (!containerWidth || Number.isNaN(containerWidth)) return 60;\r\n  return Math.max(44, Math.min(80, Math.round(containerWidth * 0.12)));\r\n}\r\n\r\nexport default function SceneView({ scene, onZoneInteract }: Props) {\r\n  const wrapRef = useRef<HTMLDivElement | null>(null);\r\n  const imgRef = useRef<HTMLImageElement | null>(null);\r\n\r\n  const [wrapSize, setWrapSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 });\r\n  const [imgNaturalSize, setImgNaturalSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 });\r\n\r\n  useEffect(() => {\r\n    const el = wrapRef.current;\r\n    if (!el) return;\r\n\r\n    const ro = new ResizeObserver((entries) => {\r\n      const entry = entries[0];\r\n      if (!entry) return;\r\n      setWrapSize({ width: entry.contentRect.width, height: entry.contentRect.height });\r\n    });\r\n\r\n    ro.observe(el);\r\n    return () => ro.disconnect();\r\n  }, []);\r\n\r\n  const minPxSize = useMemo(() => getMinZonePx(wrapSize.width), [wrapSize.width]);\r\n\r\n  const zonesLayerStyle = useMemo((): React.CSSProperties => {\r\n    const cw = wrapSize.width;\r\n    const ch = wrapSize.height;\r\n    const iw = imgNaturalSize.width;\r\n    const ih = imgNaturalSize.height;\r\n\r\n    if (!cw || !ch || !iw || !ih) {\r\n      return { left: 0, top: 0, width: '100%', height: '100%' };\r\n    }\r\n\r\n    // object-fit: contain => calculate actual rendered image rect inside container.\r\n    const imgRatio = iw / ih;\r\n    const containerRatio = cw / ch;\r\n\r\n    let renderW = cw;\r\n    let renderH = ch;\r\n    let offsetX = 0;\r\n    let offsetY = 0;\r\n\r\n    if (containerRatio > imgRatio) {\r\n      // container is wider => image fits by height\r\n      renderH = ch;\r\n      renderW = Math.round(renderH * imgRatio);\r\n      offsetX = Math.round((cw - renderW) / 2);\r\n      offsetY = 0;\r\n    } else {\r\n      // container is taller => image fits by width\r\n      renderW = cw;\r\n      renderH = Math.round(renderW / imgRatio);\r\n      offsetX = 0;\r\n      offsetY = Math.round((ch - renderH) / 2);\r\n    }\r\n\r\n    return {\r\n      left: `${offsetX}px`,\r\n      top: `${offsetY}px`,\r\n      width: `${renderW}px`,\r\n      height: `${renderH}px`,\r\n    };\r\n  }, [imgNaturalSize.height, imgNaturalSize.width, wrapSize.height, wrapSize.width]);\r\n\r\n  return (\r\n    <div className=\"KidsSceneWrap\" ref={wrapRef}>\r\n      <img\r\n        ref={imgRef}\r\n        className=\"KidsSceneImage\"\r\n        src={scene.imageUrl}\r\n        alt=\"\"\r\n        draggable={false}\r\n        onLoad={(e) => {\r\n          const img = e.currentTarget;\r\n          setImgNaturalSize({ width: img.naturalWidth, height: img.naturalHeight });\r\n        }}\r\n      />\r\n\r\n      <div className=\"KidsZonesLayer\" aria-hidden=\"true\" style={zonesLayerStyle}>\r\n        {scene.zones.map((zone) => (\r\n          <InteractiveZone\r\n            key={zone.id}\r\n            zone={zone}\r\n            minPxSize={minPxSize}\r\n            onInteract={onZoneInteract}\r\n          />\r\n        ))}\r\n      </div>\r\n    </div>\r\n  );\r\n}"
+        }
+    ]
+}

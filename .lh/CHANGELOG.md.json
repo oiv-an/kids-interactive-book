@@ -1,0 +1,18 @@
+{
+    "sourceFile": "CHANGELOG.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1769057082064,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1769057082064,
+            "name": "Commit-0",
+            "content": "# Changelog\r\n\r\n## [1.0.4] - 2026-01-22\r\n### RU\r\n- **Добавлено**: Редактор зон `?edit=1` (drag/resize) + копирование JSON в буфер: [`src/components/ZoneEditorOverlay.tsx`](src/components/ZoneEditorOverlay.tsx:1)\r\n- **Изменено**: Слой зон теперь привязан к реальному прямоугольнику отображаемого изображения (учтён `object-fit: contain`): [`src/components/SceneView.tsx`](src/components/SceneView.tsx:1)\r\n- **Изменено**: Координаты зон поддерживают формат `0..1` с обратной совместимостью со старым `0..100`: [`src/components/InteractiveZone.tsx`](src/components/InteractiveZone.tsx:1)\r\n- **Изменено**: Обновлены зоны в контенте (story-001) под новые координаты `0..1`: [`public/stories/story-001/story.json`](public/stories/story-001/story.json:1)\r\n- **Исправлено**: «Убегание» рамки при hover из-за `translate(-50%, -50%)`: [`src/App.css`](src/App.css:1)\r\n### EN\r\n- **Added**: Zones editor `?edit=1` (drag/resize) + copy JSON to clipboard: [`src/components/ZoneEditorOverlay.tsx`](src/components/ZoneEditorOverlay.tsx:1)\r\n- **Changed**: Zones layer is now bound to the actual rendered image rect (handles `object-fit: contain`): [`src/components/SceneView.tsx`](src/components/SceneView.tsx:1)\r\n- **Changed**: Zone coordinates support `0..1` with backward compatible `0..100`: [`src/components/InteractiveZone.tsx`](src/components/InteractiveZone.tsx:1)\r\n- **Changed**: Updated story content zones (story-001) to normalized `0..1` coordinates: [`public/stories/story-001/story.json`](public/stories/story-001/story.json:1)\r\n- **Fixed**: Zone hover \"jump\" caused by `translate(-50%, -50%)`: [`src/App.css`](src/App.css:1)\r\n\r\n## [1.0.2] - 2026-01-13\r\n### RU\r\n- **Добавлено**: Deploy-скрипт по SSH ключу: [`scripts/deploy.js`](scripts/deploy.js:1)\r\n- **Добавлено**: Шаблон переменных окружения деплоя: [`.env.example`](.env.example:1)\r\n- **Изменено**: `npm run build` теперь запускает `postbuild` (деплой), но деплой безопасно пропускается без `DEPLOY_ENABLED=1`.\r\n### EN\r\n- **Added**: SSH key based deploy script: [`scripts/deploy.js`](scripts/deploy.js:1)\r\n- **Added**: Deployment env template: [`.env.example`](.env.example:1)\r\n- **Changed**: `npm run build` now runs `postbuild` (deploy), but deploy is safely skipped unless `DEPLOY_ENABLED=1`.\r\n\r\n## [1.0.1] - 2026-01-13\r\n### RU\r\n- **Изменено**: В [`README.md`](README.md:1) добавлена ссылка на публичный devlog/«ритм разработки» ([`docs/steps/01-step-01.md`](docs/steps/01-step-01.md:1)), который ведёт только Иван.\r\n### EN\r\n- **Changed**: Added a link in [`README.md`](README.md:1) to the public project devlog/rhythm ([`docs/steps/01-step-01.md`](docs/steps/01-step-01.md:1)), maintained by Ivan only.\r\n\r\n## [1.0.0] - 2026-01-13\r\n### RU\r\n- **Добавлено**: Инициализация проекта React для изображений для детей.\r\n- **Добавлено**: Создание базовых файлов: AI_INSTRUCTIONS.md, VERSION.json, CHANGELOG.md.\r\n### EN\r\n- **Added**: Project initialization for React app with images for kids.\r\n- **Added**: Creation of basic files: AI_INSTRUCTIONS.md, VERSION.json, CHANGELOG.md."
+        }
+    ]
+}

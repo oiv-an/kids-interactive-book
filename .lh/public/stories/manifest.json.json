@@ -1,0 +1,18 @@
+{
+    "sourceFile": "public/stories/manifest.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1768447604335,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1768447604335,
+            "name": "Commit-0",
+            "content": "{\r\n  \"version\": 1,\r\n  \"stories\": [\r\n    {\r\n      \"id\": \"story-001\",\r\n      \"titleKey\": \"kids.stories.story001.title\",\r\n      \"coverImageUrl\": \"/assets/images/story-001/scene-002.webp\",\r\n      \"storyUrl\": \"/stories/story-001/story.json\"\r\n    },\r\n    {\r\n      \"id\": \"story-002\",\r\n      \"titleKey\": \"kids.stories.story002.title\",\r\n      \"coverImageUrl\": \"/stories/placeholder.svg\",\r\n      \"storyUrl\": \"/stories/story-002/story.json\",\r\n      \"isPlaceholder\": true\r\n    }\r\n  ]\r\n}\r\n"
+        }
+    ]
+}

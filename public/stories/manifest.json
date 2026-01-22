@@ -4,7 +4,7 @@
     {
       "id": "story-001",
       "titleKey": "kids.stories.story001.title",
-      "coverImageUrl": "/stories/placeholder.svg",
+      "coverImageUrl": "/assets/images/story-001/scene-002.webp",
       "storyUrl": "/stories/story-001/story.json"
     },
     {

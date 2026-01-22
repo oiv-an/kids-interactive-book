@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.0.4] - 2026-01-22
+### RU
+- **Добавлено**: Редактор зон `?edit=1` (drag/resize) + копирование JSON в буфер: [`src/components/ZoneEditorOverlay.tsx`](src/components/ZoneEditorOverlay.tsx:1)
+- **Изменено**: Слой зон теперь привязан к реальному прямоугольнику отображаемого изображения (учтён `object-fit: contain`): [`src/components/SceneView.tsx`](src/components/SceneView.tsx:1)
+- **Изменено**: Координаты зон поддерживают формат `0..1` с обратной совместимостью со старым `0..100`: [`src/components/InteractiveZone.tsx`](src/components/InteractiveZone.tsx:1)
+- **Изменено**: Обновлены зоны в контенте (story-001) под новые координаты `0..1`: [`public/stories/story-001/story.json`](public/stories/story-001/story.json:1)
+- **Исправлено**: «Убегание» рамки при hover из-за `translate(-50%, -50%)`: [`src/App.css`](src/App.css:1)
+### EN
+- **Added**: Zones editor `?edit=1` (drag/resize) + copy JSON to clipboard: [`src/components/ZoneEditorOverlay.tsx`](src/components/ZoneEditorOverlay.tsx:1)
+- **Changed**: Zones layer is now bound to the actual rendered image rect (handles `object-fit: contain`): [`src/components/SceneView.tsx`](src/components/SceneView.tsx:1)
+- **Changed**: Zone coordinates support `0..1` with backward compatible `0..100`: [`src/components/InteractiveZone.tsx`](src/components/InteractiveZone.tsx:1)
+- **Changed**: Updated story content zones (story-001) to normalized `0..1` coordinates: [`public/stories/story-001/story.json`](public/stories/story-001/story.json:1)
+- **Fixed**: Zone hover "jump" caused by `translate(-50%, -50%)`: [`src/App.css`](src/App.css:1)
+
 ## [1.0.2] - 2026-01-13
 ### RU
 - **Добавлено**: Deploy-скрипт по SSH ключу: [`scripts/deploy.js`](scripts/deploy.js:1)

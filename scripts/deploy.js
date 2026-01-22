@@ -7,14 +7,15 @@
 // - Unzips with overwrite
 // - Deletes zip
 //
-// Safe-by-default for OSS:
-// - If DEPLOY_ENABLED is not set to "1", script exits 0 (skips deploy).
-// - If enabled, requires DEPLOY_HOST/DEPLOY_USER/DEPLOY_SSH_KEY_PATH.
-//
-// Usage:
-//   DEPLOY_ENABLED=1 node scripts/deploy.js
-//   npm run deploy
-//
+/**
+ * Safe-by-default for OSS:
+ * - Runs automatically after `npm run build` via `postbuild`.
+ * - If DEPLOY_* vars are NOT configured, it exits 0 (skips deploy) so build does not fail.
+ *
+ * Usage:
+ *   node scripts/deploy.js
+ *   npm run deploy
+ */
 
 const { NodeSSH } = require("node-ssh");
 const fs = require("fs");
@@ -63,32 +64,34 @@ function zipDirectory(sourceDir, outZipPath) {
 async function deploy() {
   loadEnvIfPresent();
 
-  const deployEnabled = String(process.env.DEPLOY_ENABLED || "").trim() === "1";
-  if (!deployEnabled) {
-    console.log("ℹ️ Deploy skipped: set DEPLOY_ENABLED=1 to enable.");
-    process.exit(0);
-  }
-
-  const REMOTE_SITE_PATH =
-    process.env.DEPLOY_REMOTE_PATH || "/www/wwwroot/kids.ivol.pro";
+  const REMOTE_SITE_PATH = process.env.DEPLOY_REMOTE_PATH;
   const LOCAL_BUILD_PATH = process.env.DEPLOY_LOCAL_BUILD_PATH || "./build";
   const ARCHIVE_NAME = process.env.DEPLOY_ARCHIVE_NAME || "deploy.zip";
 
-  const requiredEnvVars = ["DEPLOY_HOST", "DEPLOY_USER", "DEPLOY_SSH_KEY_PATH"];
+  const requiredEnvVars = [
+    "DEPLOY_HOST",
+    "DEPLOY_USER",
+    "DEPLOY_SSH_KEY_PATH",
+    "DEPLOY_REMOTE_PATH",
+  ];
   const missingVars = ensureRequiredEnv(requiredEnvVars);
+
+  // Auto-deploy after build should be non-breaking for OSS contributors.
+  // If deploy config is missing, just skip with exit code 0.
   if (missingVars.length > 0) {
-    console.error("❌ Missing required DEPLOY_* env vars:");
-    missingVars.forEach((v) => console.error(`   - ${v}`));
-    console.error(
-      "\n💡 Create .env based on .env.example (or export env vars)"
+    console.log(
+      `ℹ️ Deploy skipped: missing ${missingVars.join(
+        ", "
+      )}. Configure .env (see .env.example) to enable deploy.`
     );
-    process.exit(1);
+    process.exit(0);
   }
 
   if (!fs.existsSync(LOCAL_BUILD_PATH)) {
-    console.error(`❌ Build folder not found: ${LOCAL_BUILD_PATH}`);
-    console.error("💡 Run: npm run build");
-    process.exit(1);
+    console.log(
+      `ℹ️ Deploy skipped: build folder not found: ${LOCAL_BUILD_PATH}`
+    );
+    process.exit(0);
   }
 
   const ssh = new NodeSSH();
@@ -116,10 +119,15 @@ async function deploy() {
     await ssh.putFile(ARCHIVE_NAME, remoteZipPath);
 
     console.log("💥 Unzipping on server...");
-    // CRA build has ./static with hashed assets; remove it to avoid stale junk.
+    // Ensure we don't keep stale build artifacts (hashed assets, removed files, etc).
+    // We intentionally do NOT delete dotfiles (e.g. .htaccess, .well-known) to avoid breaking server config.
     const command = [
       `cd ${REMOTE_SITE_PATH}`,
-      "rm -rf static",
+      // main CRA build artifacts / our public content folders
+      "rm -rf static assets stories",
+      // common CRA top-level files (from build root)
+      "rm -f asset-manifest.json manifest.json robots.txt favicon.ico logo192.png logo512.png",
+      "rm -f index.html *.map",
       `unzip -o ${ARCHIVE_NAME}`,
       `rm ${ARCHIVE_NAME}`,
     ].join(" && ");
