@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.0.5] - 2026-01-27
+### RU
+- **Добавлено**: Аудио-спрайт (RU) для story-001 и файл аудио: [`public/stories/story-001/story.json`](public/stories/story-001/story.json:1), [`public/stories/story-001/audio/ru.opus`](public/stories/story-001/audio/ru.opus:1)
+- **Добавлено**: WebAudio проигрывание сегментов для мгновенного старта и точных таймингов: [`src/helpers/audioManager.ts`](src/helpers/audioManager.ts:1)
+- **Добавлено**: Оверлей для настройки таймингов `?tuner=1` (скрыт по умолчанию): [`src/components/AudioCueTunerOverlay.tsx`](src/components/AudioCueTunerOverlay.tsx:1), [`src/App.tsx`](src/App.tsx:1)
+- **Изменено**: Обновлены таймкоды `audioSprite.ru.cues` под финальную разметку: [`public/stories/story-001/story.json`](public/stories/story-001/story.json:1)
+- **Изменено**: Обновлены переводы для UI тюнера: [`src/i18n/resources.ts`](src/i18n/resources.ts:1)
+- **Изменено**: Стили таблицы тюнера: [`src/App.css`](src/App.css:1)
+- **Изменено**: Добавлено игнорирование `.lh/` артефактов: [`.gitignore`](.gitignore:1)
+### EN
+- **Added**: RU audio sprite for story-001 and audio file: [`public/stories/story-001/story.json`](public/stories/story-001/story.json:1), [`public/stories/story-001/audio/ru.opus`](public/stories/story-001/audio/ru.opus:1)
+- **Added**: WebAudio segment playback for instant start and precise timings: [`src/helpers/audioManager.ts`](src/helpers/audioManager.ts:1)
+- **Added**: Timing tuner overlay `?tuner=1` (hidden by default): [`src/components/AudioCueTunerOverlay.tsx`](src/components/AudioCueTunerOverlay.tsx:1), [`src/App.tsx`](src/App.tsx:1)
+- **Changed**: Updated `audioSprite.ru.cues` to final timings: [`public/stories/story-001/story.json`](public/stories/story-001/story.json:1)
+- **Changed**: Added/updated tuner UI translations: [`src/i18n/resources.ts`](src/i18n/resources.ts:1)
+- **Changed**: Added tuner table styles: [`src/App.css`](src/App.css:1)
+- **Changed**: Ignored `.lh/` artifacts: [`.gitignore`](.gitignore:1)
+
 ## [1.0.4] - 2026-01-22
 ### RU
 - **Добавлено**: Редактор зон `?edit=1` (drag/resize) + копирование JSON в буфер: [`src/components/ZoneEditorOverlay.tsx`](src/components/ZoneEditorOverlay.tsx:1)

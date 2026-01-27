@@ -20,6 +20,9 @@ pnpm-debug.log*
 # deploy artifacts
 deploy.zip
 
+# Kilo Code / local AI artifacts
+.lh/
+
 # IDE
 .vscode/
 .idea/

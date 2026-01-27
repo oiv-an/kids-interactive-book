@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import './App.css';
-import type { KidsLang, KidsStory, KidsStoryManifest, KidsStoryManifestItem, KidsZone } from './types/kidsStory';
+import type { KidsAudioCue, KidsLang, KidsStory, KidsStoryManifest, KidsStoryManifestItem, KidsZone } from './types/kidsStory';
 import { loadKidsStoryByUrl, loadKidsStoryManifest } from './helpers/storyApi';
 import { kidsAudioManager } from './helpers/audioManager';
+import AudioCueTunerOverlay from './components/AudioCueTunerOverlay';
 import StoryPickerOverlay from './components/StoryPickerOverlay';
 import SceneView from './components/SceneView';
 
@@ -23,6 +24,7 @@ function App() {
 
   const [isPickerOpen, setIsPickerOpen] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+  const [isTunerOpen, setIsTunerOpen] = useState<boolean>(false);
 
   const longPressTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const longPressDurationMs = 1500;
@@ -40,6 +42,7 @@ function App() {
   const selectStory = useCallback(async (storyItem: KidsStoryManifestItem) => {
     kidsAudioManager.stop('story_change');
 
+    setIsTunerOpen(false);
     setActiveStoryItem(storyItem);
     setActiveStory(null);
     setSceneIndex(0);
@@ -89,8 +92,17 @@ function App() {
   const onAnyUserGestureCapture = useCallback(() => {
     if (hasUnlockedAudioRef.current) return;
     hasUnlockedAudioRef.current = true;
+
     kidsAudioManager.unlockByUserGesture();
-  }, []);
+
+    // Preload current story sprite (if available) to reduce first-play latency.
+    if (activeStory) {
+      const spriteLang = activeStory.audioSprite[kidsLang];
+      if (kidsAudioManager.canPlaySprite(spriteLang)) {
+        kidsAudioManager.preloadSpriteUrl(spriteLang.url);
+      }
+    }
+  }, [activeStory, kidsLang]);
 
 
   const setLanguage = useCallback(
@@ -162,6 +174,41 @@ function App() {
     if (!activeStory) return null;
     return activeStory.scenes[sceneIndex] ?? null;
   }, [activeStory, sceneIndex]);
+
+  // Dev-only: audio cue tuner UI (hide by default)
+  const isTunerEnabled = useMemo(() => {
+    try {
+      return new URLSearchParams(window.location.search).get('tuner') === '1';
+    } catch {
+      return false;
+    }
+  }, []);
+
+  const canTuneAudio = useMemo(() => {
+    if (!activeStory) return false;
+    const spriteLang = activeStory.audioSprite[kidsLang];
+    return kidsAudioManager.canPlaySprite(spriteLang);
+  }, [activeStory, kidsLang]);
+
+  const applyTunedCues = useCallback(
+    (nextCues: KidsAudioCue[]) => {
+      setActiveStory((prev) => {
+        if (!prev) return prev;
+        const prevLang = prev.audioSprite[kidsLang];
+        return {
+          ...prev,
+          audioSprite: {
+            ...prev.audioSprite,
+            [kidsLang]: {
+              ...prevLang,
+              cues: nextCues,
+            },
+          },
+        };
+      });
+    },
+    [kidsLang]
+  );
 
   const stories = manifest?.stories ?? [];
 
@@ -238,7 +285,7 @@ function App() {
       {!isFullscreen && (
         <div className="KidsTopBar">
           <button className="KidsButton" type="button" onClick={toggleFullscreen}>
-            {t('kids.ui.fullscreen') || '⛶'}
+            {t('kids.ui.fullscreen')}
           </button>
 
           <button
@@ -249,6 +296,17 @@ function App() {
           >
             {t('kids.ui.selectStory')}
           </button>
+
+          {isTunerEnabled ? (
+            <button
+              className="KidsButton"
+              type="button"
+              onClick={() => setIsTunerOpen(true)}
+              disabled={!canTuneAudio}
+            >
+              {t('kids.ui.tuneAudio')}
+            </button>
+          ) : null}
 
           <div className="KidsTopBarSpacer" />
 
@@ -336,6 +394,16 @@ function App() {
         onClose={() => setIsPickerOpen(false)}
         onSelectStory={(story) => void selectStory(story)}
       />
+
+      {isTunerEnabled && activeStory ? (
+        <AudioCueTunerOverlay
+          isOpen={isTunerOpen}
+          story={activeStory}
+          lang={kidsLang}
+          onClose={() => setIsTunerOpen(false)}
+          onApplyCues={applyTunedCues}
+        />
+      ) : null}
 
       {/* Keep for now: show what is selected (minimal text, can be removed later) */}
       {activeStoryItem ? <div className="KidsCurrentStory">{t(activeStoryItem.titleKey)}</div> : null}
