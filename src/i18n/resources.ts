@@ -15,6 +15,8 @@ const resources = {
           languageEn: 'EN',
           fullscreen: 'На весь экран',
           tuneAudio: 'Тайминги аудио',
+          rotateTitle: 'Поверните телефон',
+          rotateHint: 'Для игры нужен горизонтальный режим (landscape).',
         },
         tuner: {
           filter: 'Фильтр',
@@ -164,6 +166,8 @@ const resources = {
           languageEn: 'EN',
           fullscreen: 'Fullscreen',
           tuneAudio: 'Audio timings',
+          rotateTitle: 'Rotate your phone',
+          rotateHint: 'This game works best in landscape mode.',
         },
         tuner: {
           filter: 'Filter',

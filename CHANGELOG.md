@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.6] - 2026-01-27
+### RU
+- **Добавлено**: Заглушка «Поверните телефон» для мобильного portrait (без поворота UI): [`src/App.tsx`](src/App.tsx:1), [`src/App.css`](src/App.css:1)
+- **Добавлено**: i18n-строки для заглушки ориентации: [`src/i18n/resources.ts`](src/i18n/resources.ts:1)
+- **Изменено**: Авто-детект языка по `localStorage`/`navigator.language` + синхронизация `<html lang>` (уменьшает предложения автоперевода): [`src/i18n/config.ts`](src/i18n/config.ts:1)
+- **Изменено**: Скрытие текущего названия истории в fullscreen: [`src/App.tsx`](src/App.tsx:1)
+- **Изменено**: Поправлены зоны в контенте story-001 (scene-002/004/012): [`public/stories/story-001/story.json`](public/stories/story-001/story.json:1)
+- **Изменено**: Приоритет клика для переключателя языка (чтобы не перекрывалось боковой навигацией): [`src/App.css`](src/App.css:1)
+### EN
+- **Added**: Portrait mobile “Rotate your phone” overlay (no UI rotation hack): [`src/App.tsx`](src/App.tsx:1), [`src/App.css`](src/App.css:1)
+- **Added**: i18n strings for orientation overlay: [`src/i18n/resources.ts`](src/i18n/resources.ts:1)
+- **Changed**: Initial language detection via `localStorage`/`navigator.language` + keep `<html lang>` in sync (reduces auto-translate prompts): [`src/i18n/config.ts`](src/i18n/config.ts:1)
+- **Changed**: Hide current story title in fullscreen: [`src/App.tsx`](src/App.tsx:1)
+- **Changed**: Updated story-001 zones (scene-002/004/012): [`public/stories/story-001/story.json`](public/stories/story-001/story.json:1)
+- **Changed**: Improved language switch click priority (avoid overlap with side navigation): [`src/App.css`](src/App.css:1)
+
 ## [1.0.5] - 2026-01-27
 ### RU
 - **Добавлено**: Аудио-спрайт (RU) для story-001 и файл аудио: [`public/stories/story-001/story.json`](public/stories/story-001/story.json:1), [`public/stories/story-001/audio/ru.opus`](public/stories/story-001/audio/ru.opus:1)

@@ -19,6 +19,8 @@ function normalizeKidsLang(lng: string): KidsLang {
 function App() {
   const { t, i18n } = useTranslation();
 
+  const [isPortraitMobile, setIsPortraitMobile] = useState<boolean>(false);
+
   const [manifestState, setManifestState] = useState<LoadState>('idle');
   const [manifest, setManifest] = useState<KidsStoryManifest | null>(null);
 
@@ -56,6 +58,23 @@ function App() {
     } catch {
       setActiveStoryState('error');
     }
+  }, []);
+
+  useEffect(() => {
+    const checkOrientation = () => {
+      const isMobile = window.matchMedia('(pointer: coarse)').matches;
+      const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+      setIsPortraitMobile(isMobile && isPortrait);
+    };
+
+    checkOrientation();
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+
+    return () => {
+      window.removeEventListener('resize', checkOrientation);
+      window.removeEventListener('orientationchange', checkOrientation);
+    };
   }, []);
 
   useEffect(() => {
@@ -282,6 +301,17 @@ function App() {
 
   return (
     <div className={`App ${isFullscreen ? 'App--fullscreen' : ''}`} onPointerDownCapture={onAnyUserGestureCapture}>
+      {isPortraitMobile && !isFullscreen ? (
+        <div className="KidsRotateOverlay" role="alert" aria-live="polite">
+          <div className="KidsRotateCard">
+            <div className="KidsRotateIcon" aria-hidden="true">
+              ⟲
+            </div>
+            <div className="KidsRotateTitle">{t('kids.ui.rotateTitle')}</div>
+            <div className="KidsRotateHint">{t('kids.ui.rotateHint')}</div>
+          </div>
+        </div>
+      ) : null}
       {!isFullscreen && (
         <div className="KidsTopBar">
           <button className="KidsButton" type="button" onClick={toggleFullscreen}>
@@ -406,7 +436,7 @@ function App() {
       ) : null}
 
       {/* Keep for now: show what is selected (minimal text, can be removed later) */}
-      {activeStoryItem ? <div className="KidsCurrentStory">{t(activeStoryItem.titleKey)}</div> : null}
+      {!isFullscreen && activeStoryItem ? <div className="KidsCurrentStory">{t(activeStoryItem.titleKey)}</div> : null}
     </div>
   );
 }
